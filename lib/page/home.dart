@@ -3,6 +3,7 @@ import 'package:amoresms/model/contacts.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:amoresms/model/pesan.dart';
 
 class Home extends StatefulWidget {
   Home(String phoneNumber, {Key key}) : super(key: key);
@@ -37,12 +38,12 @@ class _HomeState extends State<Home> {
               child: Image.asset('assets/images/topbarhomeimages.png'),
             ),
             Positioned(
-              top: size.height * 0.229,
+              top: size.height * 0.22,
               child: Material(
                 color: Colors.transparent,
                 elevation: 40,
                 child: Container(
-                  height: size.height,
+                  height: size.height * 0.75,
                   width: size.width,
                   decoration: BoxDecoration(
                     color: white,
@@ -52,19 +53,21 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   child: ListView.builder(
-                    itemCount: userContacts.length,
+                    itemCount: listPesan.length,
                     itemBuilder: (context, i) {
-                      Contacts contacts = Contacts(
-                        name: userContacts[i]['name'],
-                        photo: userContacts[i]['photo'],
-                        status: userContacts[i]['status'],
+                      Pesan pesan = Pesan(
+                        jam: listPesan[i]['jam'],
+                        hari: listPesan[i]['hari'],
+                        tanggal: listPesan[i]['tanggal'],
+                        detailPesan: listPesan[i]['detailPesan']
                       );
+                      print(pesan.hari);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
-                          onTap: () => print("${contacts.name}"),
+                          onTap: () => print("${pesan.hari}"),
                           child: ContactElement(
-                            contacts: contacts,
+                            pesan: pesan,
                           ),
                         ),
                       );

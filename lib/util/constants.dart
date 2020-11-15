@@ -45,3 +45,57 @@ List<Map<String, dynamic>> userContacts = [
         "https://cdn.fastly.picmonkey.com/contentful/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&q=70&fm=webp",
   },
 ];
+
+List<Map<String, dynamic>> listPesan = [
+  {
+    "jam": "13:00",
+    "hari": "Senin",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"https://cdn.fastly.picmonkey.com/contentful/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&q=70&fm=webp",
+        "nama":"Said Muhammad Khatami",
+        "nomertelpon":"081310894329",
+        "berita":"Delivered",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Selasa",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+];
+
+
+bool equalIgnoreCase(String string1, String string2){
+  return string1.toLowerCase() == string2.toLowerCase();
+}
+
+String getImageAsset(String hari) {
+  String val = "";
+  if(equalIgnoreCase(hari,"Senin")){
+    val = 'assets/images/calsenin.png';
+  }else if(equalIgnoreCase(hari,"Slasa")){
+    val = 'assets/images/calselasa.png';
+  }else if(equalIgnoreCase(hari,"Rabu")){
+    val = 'assets/images/calrabu.png';
+  }else if(equalIgnoreCase(hari,"Kamis")){
+    val = 'assets/images/calkamis.png';
+  }else if(equalIgnoreCase(hari,"Jumat")){
+    val = 'assets/images/caljumat.png';
+  }else if(equalIgnoreCase(hari,"Sabtu")){
+    val = 'assets/images/calsabtu.png';
+  }else if(equalIgnoreCase(hari,"Minggu")){
+    val = 'assets/images/calminggu.png';
+  }
+  return val;
+}
