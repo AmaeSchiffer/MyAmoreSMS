@@ -4,16 +4,15 @@ import 'package:get/get.dart';
 import 'package:amoresms/page/detail.dart';
 import 'package:amoresms/components/pesan_elements.dart';
 import 'package:amoresms/util/constants.dart';
+
 class ListViewPesan extends StatelessWidget {
   const ListViewPesan({
     Key key,
-    @required this.size,
   }) : super(key: key);
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Material(
       color: Colors.transparent,
       elevation: 40,
@@ -32,15 +31,18 @@ class ListViewPesan extends StatelessWidget {
           itemCount: listPesan.length,
           itemBuilder: (context, i) {
             Pesan pesan = Pesan(
-              jam: listPesan[i]['jam'],
-              hari: listPesan[i]['hari'],
-              tanggal: listPesan[i]['tanggal'],
-              detailPesan: listPesan[i]['details']
-            );
+                jam: listPesan[i]['jam'],
+                hari: listPesan[i]['hari'],
+                tanggal: listPesan[i]['tanggal'],
+                detailPesan: listPesan[i]['details']);
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: () => Get.to(Detail(pesan.detailPesan)),
+                onTap: () => Get.to(
+                  Detail(
+                    detailPesan: pesan.detailPesan,
+                  ),
+                ),
                 child: PesanElement(
                   pesan: pesan,
                 ),

@@ -2,6 +2,7 @@ import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:amoresms/views/listviewpesan.dart';
+
 class Home extends StatefulWidget {
   Home(String phoneNumber, {Key key}) : super(key: key);
 
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
             ),
             Positioned(
               top: size.height * 0.22,
-              child: ListViewPesan(size: size),
+              child: ListViewPesan(),
             ),
           ],
         ),
@@ -44,4 +45,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
