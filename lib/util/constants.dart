@@ -84,7 +84,7 @@ String getImageAsset(String hari) {
   String val = "";
   if(equalIgnoreCase(hari,"Senin")){
     val = 'assets/images/calsenin.png';
-  }else if(equalIgnoreCase(hari,"Slasa")){
+  }else if(equalIgnoreCase(hari,"Selasa")){
     val = 'assets/images/calselasa.png';
   }else if(equalIgnoreCase(hari,"Rabu")){
     val = 'assets/images/calrabu.png';
