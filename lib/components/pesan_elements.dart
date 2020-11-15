@@ -1,4 +1,3 @@
-import 'package:amoresms/model/contacts.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:amoresms/model/pesan.dart';

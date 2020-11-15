@@ -34,13 +34,16 @@ class ListViewPesan extends StatelessWidget {
                 jam: listPesan[i]['jam'],
                 hari: listPesan[i]['hari'],
                 tanggal: listPesan[i]['tanggal'],
-                detailPesan: listPesan[i]['details']);
+                pesan: listPesan[i]['pesan'],
+                detailPesan: listPesan[i]['details'],
+            );
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () => Get.to(
                   Detail(
                     detailPesan: pesan.detailPesan,
+                    pesan: pesan.pesan,
                   ),
                 ),
                 child: PesanElement(

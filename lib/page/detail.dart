@@ -2,16 +2,31 @@ import 'package:amoresms/components/detailpesan_elements.dart';
 import 'package:flutter/material.dart';
 import 'package:amoresms/model/detail_pesan.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+String phoneNumber;
 class Detail extends StatefulWidget {
   final List<Map<String, dynamic>> detailPesan;
-  Detail({@required this.detailPesan, Key key}) : super(key: key);
+  final String pesan;
+  Detail({@required this.detailPesan, @required this.pesan, Key key})
+      : super(key: key);
 
   @override
   _DetailState createState() => _DetailState();
 }
 
 class _DetailState extends State<Detail> {
+
+  Future checkUserLogged() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var obtainPhoneNumber = prefs.getString('userKey');
+    setState(() {
+      phoneNumber = obtainPhoneNumber;
+    });
+    print(phoneNumber);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,7 +48,35 @@ class _DetailState extends State<Detail> {
                   color: white,
                   size: 40,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+            ),
+            Positioned(
+              left: 17,
+              top: 48,
+              child: Container(
+                height: size.height * 0.175,
+                width: size.width * 0.81,
+                decoration: BoxDecoration(
+                  color: white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                    color: bluePrimary,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 12.0),
+                  child: Text(
+                    "${widget.pesan}",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ),
             Positioned(

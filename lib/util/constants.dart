@@ -51,6 +51,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "13:00",
     "hari": "Senin",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy",
     "details" : [
       {
         "photo":"https://blog.photofeeler.com/wp-content/uploads/2017/12/linkedin-profile-picture.jpg",
@@ -65,8 +66,8 @@ List<Map<String, dynamic>> listPesan = [
         "berita":"Error",
       },
       {
-        "photo":"https://cdn.fastly.picmonkey.com/contentful/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&q=70&fm=webp",
-        "nama":"Arifai",
+        "photo":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRkR76m2hBHiJNOZeLHauIoEgCQuQ5NnhkNEA&usqp=CAU",
+        "nama":"Mey Russandi",
         "nomertelpon":"081310894329",
         "berita":"Error",
       },
@@ -76,6 +77,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Selasa",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy1",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
@@ -89,6 +91,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Rabu",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy2",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
@@ -102,6 +105,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Kamis",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy3",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
@@ -115,6 +119,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Jumat",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy4",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
@@ -128,6 +133,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Sabtu",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy5",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
@@ -141,6 +147,7 @@ List<Map<String, dynamic>> listPesan = [
     "jam": "08:25",
     "hari": "Minggu",
     "tanggal":"02 Januari 2020",
+    "pesan": "yxgKuy6",
     "details" : [
       {
         "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
