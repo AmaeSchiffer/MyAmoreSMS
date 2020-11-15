@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Color bluePrimary = Color(0xff314766);
-Color white = Color(0xffeeeeee);
+Color white = Color(0xffffffff);
 Color grey = Color(0xff393e46);
 Color black = Color(0xff393e46);
 Color green = Color(0xff12d732);
@@ -57,12 +57,83 @@ List<Map<String, dynamic>> listPesan = [
         "nama":"Said Muhammad Khatami",
         "nomertelpon":"081310894329",
         "berita":"Delivered",
-      }
+      },
+      {
+        "photo":"https://cdn.fastly.picmonkey.com/contentful/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&q=70&fm=webp",
+        "nama":"Arifai",
+        "nomertelpon":"081310894329",
+        "berita":"Error",
+      },
     ]
   },
   {
     "jam": "08:25",
     "hari": "Selasa",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Rabu",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Kamis",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Jumat",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Sabtu",
+    "tanggal":"02 Januari 2020",
+    "details" : [
+      {
+        "photo":"http://www.bbk.ac.uk/mce/wp-content/uploads/2015/03/8327142885_9b447935ff.jpg",
+        "nama":"Achmad",
+        "nomertelpon":"089627303284",
+        "berita":"Error",
+      }
+    ]
+  },
+  {
+    "jam": "08:25",
+    "hari": "Minggu",
     "tanggal":"02 Januari 2020",
     "details" : [
       {

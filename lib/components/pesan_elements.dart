@@ -3,9 +3,9 @@ import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:amoresms/model/pesan.dart';
 
-class ContactElement extends StatelessWidget {
+class PesanElement extends StatelessWidget {
   final Pesan pesan;
-  const ContactElement({Key key, this.pesan}) : super(key: key);
+  const PesanElement({Key key, this.pesan}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class ContactElement extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0,),
       child: Container(
         decoration: BoxDecoration(
-          color: white,
+          color: Color(0xffffffff),
           border: Border.all(
             color:bluePrimary,
           ),
@@ -36,7 +36,6 @@ class ContactElement extends StatelessWidget {
                   Container(
                     height: 80,
                     width: 80,
-                    
                     child: Image.asset(getImageAsset(pesan.hari)),
                   ),
                   SizedBox(

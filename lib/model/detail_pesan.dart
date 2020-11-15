@@ -1,8 +1,8 @@
 class DetailPesan {
   String photo;
   String nama;
-  String nomortelpon;
+  String nomertelpon;
   String berita;
 
-  DetailPesan({this.photo,this.nama,this.nomortelpon,this.berita});
+  DetailPesan({this.photo,this.nama,this.nomertelpon,this.berita});
 }
