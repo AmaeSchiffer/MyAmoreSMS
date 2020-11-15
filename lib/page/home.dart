@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
             // Add your onPressed code here!
           },
           child: Icon(
-            FlutterIcons.send_mco,
+            FlutterIcons.message_mco,
             size: 28,
           ),
           backgroundColor: bluePrimary.withOpacity(0.9),
