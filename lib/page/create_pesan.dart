@@ -43,12 +43,12 @@ class _CreatePesanState extends State<CreatePesan> {
             Positioned(
               bottom: 10,
               child: Padding(
-                padding: const EdgeInsets.only(left: 12.0),
+                padding: const EdgeInsets.only(left: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Container(
-                      width: size.width * 0.7,
+                      width: size.width * 0.74,
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -84,13 +84,10 @@ class _CreatePesanState extends State<CreatePesan> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: size.width * 0.04,
-                    ),
                     IconButton(
                       color: bluePrimary,
-                      iconSize: 44,
-                      icon: Icon(Icons.send_rounded),
+                      iconSize: 50,
+                      icon: Image.asset('assets/images/imagesbtnsend.png'),
                       onPressed: (){},
                     )
                   ],
