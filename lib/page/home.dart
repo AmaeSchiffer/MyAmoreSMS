@@ -1,7 +1,10 @@
+import 'package:amoresms/components/topimages.dart';
+import 'package:amoresms/page/create_pesan.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:amoresms/views/listviewpesan.dart';
+import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   Home(String phoneNumber, {Key key}) : super(key: key);
@@ -17,8 +20,8 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // Add your onPressed code here!
+          onPressed: () async {
+            Get.to(CreatePesan());
           },
           child: Icon(
             FlutterIcons.message_mco,
@@ -31,9 +34,9 @@ class _HomeState extends State<Home> {
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Positioned(
+            TopImages(
               right: 0,
-              child: Image.asset('assets/images/topbarhomeimages.png'),
+              images: 'assets/images/topbarhomeimages.png',
             ),
             Positioned(
               top: size.height * 0.22,

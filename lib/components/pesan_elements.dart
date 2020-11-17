@@ -9,15 +9,20 @@ class PesanElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 5.0,),
+      padding: const EdgeInsets.only(
+        left: 8.0,
+        right: 8.0,
+        top: 5.0,
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xffffffff),
           border: Border.all(
-            color:bluePrimary,
+            color: bluePrimary,
           ),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(
+          boxShadow: [
+            BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 5,
               blurRadius: 7,
@@ -26,7 +31,7 @@ class PesanElement extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(12.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -45,33 +50,59 @@ class PesanElement extends StatelessWidget {
                     children: [
                       Text(
                         '${pesan.jam}',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
                         '${pesan.hari}',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Text(
                         '${pesan.tanggal}',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300),
                       ),
                     ],
                   ),
                 ],
               ),
-              Container(
-                height: 15,
-                width: 15,
-                child: Icon(
+              IconButton(
+                icon: Icon(
                   Icons.more_vert,
+                  size: 28,
                 ),
-              )
+                onPressed: () {
+                  showDialog(
+                    useSafeArea: true,
+                    context: context,
+                    builder: (_) => new AlertDialog(
+                      title: new Text("Export"),
+                      content: new Text("Do You want export to File?"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text('Yes'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        FlatButton(
+                          child: Text('No'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),

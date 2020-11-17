@@ -1,11 +1,13 @@
-import 'package:amoresms/components/detailpesan_elements.dart';
+import 'package:amoresms/components/back_button.dart';
+import 'package:amoresms/components/topimages.dart';
+import 'package:amoresms/components/white_box_with_radius.dart';
+import 'package:amoresms/views/content_of_detailpesan.dart';
 import 'package:flutter/material.dart';
-import 'package:amoresms/model/detail_pesan.dart';
 import 'package:amoresms/util/constants.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String phoneNumber;
+
 class Detail extends StatefulWidget {
   final List<Map<String, dynamic>> detailPesan;
   final String pesan;
@@ -17,7 +19,6 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
-
   Future checkUserLogged() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var obtainPhoneNumber = prefs.getString('userKey');
@@ -36,28 +37,19 @@ class _DetailState extends State<Detail> {
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            Positioned(
+            TopImages(
+              images: 'assets/images/detailpesantopimages.png',
               right: 0,
-              child: Image.asset('assets/images/detailpesantopimages.png'),
             ),
             Positioned(
               left: 5,
-              child: IconButton(
-                icon: Icon(
-                  Icons.navigate_before,
-                  color: white,
-                  size: 40,
-                ),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
+              child: BackBtn(),
             ),
             Positioned(
               left: 17,
               top: 48,
               child: Container(
-                height: size.height * 0.175,
+                height: size.height * 0.165,
                 width: size.width * 0.81,
                 decoration: BoxDecoration(
                   color: white.withOpacity(0.8),
@@ -80,60 +72,13 @@ class _DetailState extends State<Detail> {
               ),
             ),
             Positioned(
-              top: size.height * 0.25,
-              child: Material(
-                color: Colors.transparent,
-                elevation: 40,
-                child: Container(
-                  height: size.height * 0.75,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 12.0,
-                          left: 20.0,
-                        ),
-                        child: Text(
-                          "Receiver Messages",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: bluePrimary,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: widget.detailPesan.length,
-                        itemBuilder: (context, i) {
-                          DetailPesan pesan = DetailPesan(
-                            photo: widget.detailPesan[i]['photo'],
-                            nama: widget.detailPesan[i]['nama'],
-                            nomertelpon: widget.detailPesan[i]['nomertelpon'],
-                            berita: widget.detailPesan[i]['berita'],
-                          );
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              onTap: () => print(pesan.nama),
-                              child: DetailPesanComponent(
-                                detailPesan: pesan,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+              top: size.height * 0.228,
+              child: WhiteBoxRadius(
+                size: size,
+                height: 0.75,
+                content: ContentOfDetailPesan(
+                  pesan: widget.pesan,
+                  detailPesan: widget.detailPesan,
                 ),
               ),
             ),

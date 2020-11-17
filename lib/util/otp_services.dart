@@ -1,3 +1,4 @@
+import 'package:amoresms/page/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp/flutter_otp.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -36,7 +37,7 @@ class OtpServices extends FlutterOtp {
     //function parameter 'message' is optional.
     generateOtp(min, max);
     SmsSender sender = new SmsSender();
-    String address = (countryCode ?? '+1') +
+    String address = (countryCode ?? '+62') +
         phoneNumber; // +1 for USA. Change it according to use.
 
     /// Use country code as per your requirement.
@@ -63,10 +64,7 @@ Future<OtpServices> checkpermission(String input) async {
   if (!smsStatus.isGranted) await Permission.sms.request();
   if (await Permission.sms.isGranted) {
     otp.sendOtp(
-      input.substring(
-        1,
-        input.length,
-      ),
+      phoneNumber = input
     );
   } else {
     Fluttertoast.showToast(

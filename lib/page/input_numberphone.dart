@@ -74,6 +74,7 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
                       maxLength: 14,
                       decoration: InputDecoration(
                         hintMaxLines: 16,
+                        prefixText: '+62',
                         focusedBorder: OutlineInputBorder(
                           borderRadius: const BorderRadius.all(
                             const Radius.circular(14.0),
@@ -88,7 +89,6 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
                           borderSide:
                               BorderSide(color: bluePrimary, width: 1.5),
                         ),
-                        hintText: 'Nomer Telpon',
                       ),
                     ),
                   ),

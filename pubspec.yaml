@@ -25,13 +25,17 @@ dependencies:
     sdk: flutter
   animated_splash_screen: ^1.0.1+2
   animator: ^2.0.1
+  auto_size_text_field: ^0.1.7
   count_down_timer: ^1.0.1
   cupertino_icons: ^1.0.0
+  excel: ^1.1.5
+  file_picker: ^2.0.13
   flare_flutter: ^2.0.6
   flutter_countdown_timer: ^1.4.0
   flutter_icons: ^1.1.0
   flutter_otp: ^0.3.2
   flutter_sms: ^2.1.1
+  fluttercontactpicker: ^3.1.0
   fluttertoast: ^4.0.1
   get: ^3.17.1
   imagebutton: ^0.0.6
