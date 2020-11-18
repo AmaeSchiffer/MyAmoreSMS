@@ -26,11 +26,11 @@ class Body extends StatelessWidget {
             child: BackBtn(),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 200),
+            padding: EdgeInsets.only(top: 180),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               //Text("sdksnkds"),
-               ContentOfCreatePesan()
+              ContentOfCreatePesan()
             ]),
           ),
           Positioned(

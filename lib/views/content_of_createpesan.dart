@@ -17,38 +17,29 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
   final inputPhoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
-        ),
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: listPesan.length,
-          itemBuilder: (context, i) {
-            // Pesan pesan = Pesan(
-            //   jam: listPesan[i]['jam'],
-            //   hari: listPesan[i]['hari'],
-            //   tanggal: listPesan[i]['tanggal'],
-            //   pesan: listPesan[i]['pesan'],
-            //   detailPesan: listPesan[i]['details'],
-            // );
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                  // onTap: () => print(pesan.pesan),
-                  // child: PesanElement(
-                  //   pesan: pesan,
-                  // ),
-                  ),
-            );
-          },
-        ),
+    return WhiteBoxRadius(
+      content: ListView.builder(
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemCount: listPesan.length,
+        itemBuilder: (context, i) {
+          // Pesan pesan = Pesan(
+          //   jam: listPesan[i]['jam'],
+          //   hari: listPesan[i]['hari'],
+          //   tanggal: listPesan[i]['tanggal'],
+          //   pesan: listPesan[i]['pesan'],
+          //   detailPesan: listPesan[i]['details'],
+          // );
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: InkWell(
+                // onTap: () => print(pesan.pesan),
+                // child: PesanElement(
+                //   pesan: pesan,
+                // ),
+                ),
+          );
+        },
       ),
     );
   }
