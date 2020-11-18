@@ -12,8 +12,9 @@ class DetailPesanComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(4),
-          vertical: getProportionateScreenWidth(8)),
+        horizontal: getProportionateScreenWidth(4),
+        vertical: getProportionateScreenWidth(8),
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xffffffff),
@@ -41,11 +42,12 @@ class DetailPesanComponent extends StatelessWidget {
                 height: getProportionateScreenWidth(50),
                 width: getProportionateScreenWidth(50),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                      //image: NetworkImage('${detailPesan.photo}'),
-                      fit: BoxFit.fill,
-                    )),
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                    //image: NetworkImage('${detailPesan.photo}'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
               SizedBox(width: getProportionateScreenWidth(10)),
               Column(

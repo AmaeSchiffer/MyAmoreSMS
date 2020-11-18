@@ -17,14 +17,12 @@ class CreatePesan extends StatefulWidget {
 }
 
 class _CreatePesanState extends State<CreatePesan> {
-  
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
         backgroundColor: bluePrimary,
-        body: Body()
+        body: Body(),
       ),
     );
   }

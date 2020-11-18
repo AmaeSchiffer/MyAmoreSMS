@@ -27,6 +27,7 @@ final inputPhoneNumberController = TextEditingController();
           Positioned(
             top: SizeConfig.screenHeight * 0.224,
             child: WhiteBoxRadius(
+              height: SizeConfig.screenHeight * 0.7,
               content: ContentOfCreatePesan(),
             ),
           ),

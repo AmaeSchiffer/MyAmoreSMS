@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class WhiteBoxRadius extends StatelessWidget {
   final Widget content;
-  const WhiteBoxRadius({@required this.content, Key key}) : super(key: key);
+  final double height, width;
+  const WhiteBoxRadius({@required this.content, Key key, this.height, this.width}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        height: height,
         margin : EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(8)),
         decoration: BoxDecoration(
           color: Colors.white,
