@@ -30,26 +30,7 @@ class Body extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               BackBtn(),
-              Container(
-                padding: EdgeInsets.all(getProportionateScreenWidth(4)),
-                height: SizeConfig.screenHeight * 0.3,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(
-                    color: bluePrimary,
-                  ),
-                ),
-                child: Text(
-                  "${pesan}",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              TextPesan(pesan: pesan),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(
@@ -108,7 +89,8 @@ class Body extends StatelessWidget {
                                         fontSize:
                                             getProportionateScreenWidth(16)),
                                   ),
-                                  SizedBox(height : getProportionateScreenWidth(10)),
+                                  SizedBox(
+                                      height: getProportionateScreenWidth(10)),
                                   Text(
                                     '${penerima.noPenerima}',
                                     style: TextStyle(
@@ -149,5 +131,38 @@ class Body extends StatelessWidget {
       );
     }
     return container;
+  }
+}
+
+class TextPesan extends StatelessWidget {
+  const TextPesan({
+    Key key,
+    @required this.pesan,
+  }) : super(key: key);
+
+  final String pesan;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(getProportionateScreenWidth(4)),
+      height: SizeConfig.screenHeight * 0.3,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: white.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(
+          color: bluePrimary,
+        ),
+      ),
+      child: Text(
+        "${pesan}",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
   }
 }
