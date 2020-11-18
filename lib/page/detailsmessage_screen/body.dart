@@ -31,86 +31,102 @@ class Body extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               BackBtn(),
               TextPesan(pesan: pesan),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: getProportionateScreenWidth(8)),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                    ),
-                  ),
-                  child: ListView.builder(
-                      itemCount: penerimaPesan.length,
-                      itemBuilder: (context, i) {
-                        //Penerima data = penerimaPesan[i];
-                        Penerima penerima = Penerima(
-                          idPenerima: penerimaPesan[i].idPenerima,
-                          namaPenerima: penerimaPesan[i].namaPenerima,
-                          noPenerima: penerimaPesan[i].noPenerima,
-                          status: penerimaPesan[i].status,
-                        );
-                        print("${penerima}");
-                        return Container(
-                          padding:
-                              EdgeInsets.all(getProportionateScreenWidth(10)),
-                          margin:
-                              EdgeInsets.all(getProportionateScreenWidth(10)),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                          child: Row(
-                            //row buat semua isi konten
-                            children: <Widget>[
-                              Container(
-                                height: getProportionateScreenWidth(50),
-                                width: getProportionateScreenWidth(50),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  // image: DecorationImage(
-                                  //   //image: NetworkImage('${detailPesan.photo}'),
-                                  //   fit: BoxFit.fill,
-                                  // )
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '${penerima.namaPenerima}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize:
-                                            getProportionateScreenWidth(16)),
-                                  ),
-                                  SizedBox(
-                                      height: getProportionateScreenWidth(10)),
-                                  Text(
-                                    '${penerima.noPenerima}',
-                                    style: TextStyle(
-                                      fontSize: getProportionateScreenWidth(14),
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              getDelivered(penerima.status),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
-              )
+              ListPenerimaPesan(penerimaPesan: penerimaPesan)
             ]),
           ),
         ],
+      ),
+    );
+  }
+
+
+}
+
+class ListPenerimaPesan extends StatelessWidget {
+  const ListPenerimaPesan({
+    Key key,
+    @required this.penerimaPesan,
+  }) : super(key: key);
+
+  final List<Penerima> penerimaPesan;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(8)),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+        child: ListView.builder(
+            itemCount: penerimaPesan.length,
+            itemBuilder: (context, i) {
+              //Penerima data = penerimaPesan[i];
+              Penerima penerima = Penerima(
+                idPenerima: penerimaPesan[i].idPenerima,
+                namaPenerima: penerimaPesan[i].namaPenerima,
+                noPenerima: penerimaPesan[i].noPenerima,
+                status: penerimaPesan[i].status,
+              );
+              print("${penerima}");
+              return Container(
+                padding:
+                    EdgeInsets.all(getProportionateScreenWidth(10)),
+                margin:
+                    EdgeInsets.all(getProportionateScreenWidth(10)),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+                child: Row(
+                  //row buat semua isi konten
+                  children: <Widget>[
+                    Container(
+                      height: getProportionateScreenWidth(50),
+                      width: getProportionateScreenWidth(50),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        // image: DecorationImage(
+                        //   //image: NetworkImage('${detailPesan.photo}'),
+                        //   fit: BoxFit.fill,
+                        // )
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${penerima.namaPenerima}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  getProportionateScreenWidth(16)),
+                        ),
+                        SizedBox(
+                            height: getProportionateScreenWidth(10)),
+                        Text(
+                          '${penerima.noPenerima}',
+                          style: TextStyle(
+                            fontSize: getProportionateScreenWidth(14),
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    getDelivered(penerima.status),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }
@@ -132,6 +148,7 @@ class Body extends StatelessWidget {
     }
     return container;
   }
+
 }
 
 class TextPesan extends StatelessWidget {
