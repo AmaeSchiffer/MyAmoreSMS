@@ -1,4 +1,4 @@
-import 'package:amoresms/page/detail.dart';
+import 'package:amoresms/page/detailsmessage_screen/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp/flutter_otp.dart';
 import 'package:fluttertoast/fluttertoast.dart';

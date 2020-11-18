@@ -1,22 +1,20 @@
 import 'package:amoresms/model/detail_pesan.dart';
+import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:amoresms/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class DetailPesanComponent extends StatelessWidget {
-  final DetailPesan detailPesan;
+  final Penerima detailPesan;
   const DetailPesanComponent({Key key, this.detailPesan}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 8.0,
-        right: 8.0,
-        top: 5.0,
-      ),
+      padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(4),
+          vertical: getProportionateScreenWidth(8)),
       child: Container(
-        height: size.height * 0.1,
         decoration: BoxDecoration(
           color: Color(0xffffffff),
           border: Border.all(
@@ -32,57 +30,47 @@ class DetailPesanComponent extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 18.0),
-                  child: Container(
-                    height: 46,
-                    width: 46,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: NetworkImage('${detailPesan.photo}'),
-                          fit: BoxFit.fill,
-                        )),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: getProportionateScreenWidth(10),
+              horizontal: getProportionateScreenWidth(10)),
+          child: Row(
+            //row buat semua isi konten
+            children: <Widget>[
+              Container(
+                height: getProportionateScreenWidth(50),
+                width: getProportionateScreenWidth(50),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      //image: NetworkImage('${detailPesan.photo}'),
+                      fit: BoxFit.fill,
+                    )),
+              ),
+              SizedBox(width: getProportionateScreenWidth(10)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${detailPesan.namaPenerima}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: getProportionateScreenWidth(16)),
                   ),
-                ),
-                SizedBox(
-                  width: size.width * 0.040,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${detailPesan.nama}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '${detailPesan.nomertelpon}',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    '${detailPesan.noPenerima}',
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(14),
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 27.0),
-              child: getDelivered(detailPesan.berita),
-            ),
-          ],
+                ],
+              ),
+              Spacer(),
+              getDelivered(detailPesan.status),
+            ],
+          ),
         ),
       ),
     );
@@ -95,7 +83,7 @@ class DetailPesanComponent extends StatelessWidget {
         height: 34,
         width: 34,
         child: Image.asset('assets/images/deliveredimages.png'),
-      ); 
+      );
     } else if (equalIgnoreCase(berita, "Error")) {
       container = Container(
         height: 34,

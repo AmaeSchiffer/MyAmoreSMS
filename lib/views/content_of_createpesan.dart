@@ -36,20 +36,20 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
             physics: const BouncingScrollPhysics(),
             itemCount: listPesan.length,
             itemBuilder: (context, i) {
-              Pesan pesan = Pesan(
-                jam: listPesan[i]['jam'],
-                hari: listPesan[i]['hari'],
-                tanggal: listPesan[i]['tanggal'],
-                pesan: listPesan[i]['pesan'],
-                detailPesan: listPesan[i]['details'],
-              );
+              // Pesan pesan = Pesan(
+              //   jam: listPesan[i]['jam'],
+              //   hari: listPesan[i]['hari'],
+              //   tanggal: listPesan[i]['tanggal'],
+              //   pesan: listPesan[i]['pesan'],
+              //   detailPesan: listPesan[i]['details'],
+              // );
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: () => print(pesan.pesan),
-                  child: PesanElement(
-                    pesan: pesan,
-                  ),
+                  // onTap: () => print(pesan.pesan),
+                  // child: PesanElement(
+                  //   pesan: pesan,
+                  // ),
                 ),
               );
             },

@@ -1,6 +1,7 @@
-import 'package:amoresms/page/otp_verification.dart';
+import 'package:amoresms/page/otpverification_screen/otp_verification.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:amoresms/util/otp_services.dart';
+import 'package:amoresms/util/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,7 +20,6 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
   int maxNumber = 99999;
   String countryCode = "+62";
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: white,
@@ -27,7 +27,7 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
         children: <Widget>[
           Container(
             color: white,
-            height: size.height * 0.5,
+            height: SizeConfig.screenHeight * 0.5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -97,8 +97,8 @@ class _InputPhoneNumberState extends State<InputPhoneNumber> {
             ),
           ),
           Container(
-            height: size.height * 0.5,
-            width: size.width,
+            height: SizeConfig.screenHeight * 0.5,
+            width: SizeConfig.screenWidth,
             decoration: BoxDecoration(
               color: bluePrimary,
               borderRadius: BorderRadius.only(

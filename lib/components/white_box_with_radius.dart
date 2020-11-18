@@ -1,18 +1,14 @@
+import 'package:amoresms/util/size_config.dart';
 import 'package:flutter/material.dart';
 
 class WhiteBoxRadius extends StatelessWidget {
-  final Size size;
-  final double height;
   final Widget content;
-  const WhiteBoxRadius({@required this.size, @required this.height, @required this.content, Key key}) : super(key: key);
+  const WhiteBoxRadius({@required this.content, Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      elevation: 40,
+    return Expanded(
       child: Container(
-        height: size.height * height,
-        width: size.width,
+        margin : EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(8)),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

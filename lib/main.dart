@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:amoresms/page/home.dart';
-import 'package:amoresms/page/landingpage.dart';
+import 'package:amoresms/page/home_screen/home.dart';
+import 'package:amoresms/page/landing_screen/landingpage.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:amoresms/util/size_config.dart';
 import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainSplashScreen(),
+      home: Home("089602716401"),
     );
   }
 }
@@ -56,7 +57,7 @@ class _MainSplashScreenState extends State<MainSplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: bluePrimary,
       body: Column(
@@ -68,7 +69,7 @@ class _MainSplashScreenState extends State<MainSplashScreen> {
               Animator<double>(
                 curve: Curves.fastLinearToSlowEaseIn,
                 duration: Duration(seconds: 5),
-                tween: Tween<double>(begin: 0, end: size.width * 0.8),
+                tween: Tween<double>(begin: 0, end: SizeConfig.screenWidth * 0.8),
                 builder: (context, animatorState, child) => Center(
                   child: Container(
                     height: animatorState.value,

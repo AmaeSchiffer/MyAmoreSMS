@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:amoresms/page/home.dart';
+import 'package:amoresms/page/home_screen/home.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:amoresms/util/otp_services.dart';
 import 'package:flare_flutter/flare_actor.dart';

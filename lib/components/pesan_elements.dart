@@ -1,3 +1,4 @@
+import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:amoresms/model/pesan.dart';
@@ -49,7 +50,7 @@ class PesanElement extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${pesan.jam}',
+                        pesan.jam ?? "",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
@@ -57,7 +58,7 @@ class PesanElement extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        '${pesan.hari}',
+                        pesan.hari??"",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w300),
                       ),
@@ -65,7 +66,7 @@ class PesanElement extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        '${pesan.tanggal}',
+                        pesan.tanggal ?? "",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w300),
                       ),
