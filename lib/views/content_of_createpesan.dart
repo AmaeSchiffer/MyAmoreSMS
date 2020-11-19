@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:amoresms/components/text_component.dart';
 import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:excel/excel.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,9 +28,34 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
     super.initState();
   }
 
+  Future<void> openStorage() async {
+    var storagesStatus = await Permission.storage.status;
+    if (!storagesStatus.isGranted) await Permission.storage.request();
+    if (await Permission.sms.isGranted) {
+      FilePickerResult result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['xls', 'xlsx'],
+      );
+      if (result != null) {
+        PlatformFile file = result.files.first;
+        print(file.path);
+        var bytes = File(file.path).readAsBytesSync();
+        var excel = Excel.decodeBytes(bytes);
+        for (var table in excel.tables.keys) {
+          print(table); //sheet Name
+          print(excel.tables[table].maxCols);
+          print(excel.tables[table].maxRows);
+          for (var row in excel.tables[table].rows) {
+            print("$row");
+          }
+        }
+      } else {}
+    }
+  }
+
   Future<void> openPhoneContact() async {
-    var smsStatus = await Permission.contacts.status;
-    if (!smsStatus.isGranted) await Permission.contacts.request();
+    var contactStatus = await Permission.contacts.status;
+    if (!contactStatus.isGranted) await Permission.contacts.request();
     if (await Permission.sms.isGranted) {
       final PhoneContact contact =
           await FlutterContactPicker.pickPhoneContact();
@@ -86,6 +115,7 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
                   child: GestureDetector(
                     onTap: () {
                       print("Pilih Berkas clicked !");
+                      openStorage();
                     },
                     child: Container(
                       width: size.width * 0.4,
@@ -114,9 +144,6 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
                     onTap: () {
                       print("Tambah Kontak clicked !");
                       openPhoneContact();
-                      listPenerima.forEach((element) {
-                        print(element.noPenerima);
-                      });
                     },
                     child: Container(
                       width: size.width * 0.4,
@@ -148,7 +175,6 @@ class _ContentOfCreatePesanState extends State<ContentOfCreatePesan> {
             physics: const BouncingScrollPhysics(),
             itemCount: listPenerima.length,
             itemBuilder: (context, i) {
-              final item = listPenerima[i];
               Penerima penerima = Penerima(
                 namaPenerima: listPenerima[i].namaPenerima,
                 noPenerima: listPenerima[i].noPenerima,
