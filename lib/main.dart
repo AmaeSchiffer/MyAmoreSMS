@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:amoresms/page/home_screen/home.dart';
-import 'package:amoresms/page/landing_screen/landingpage.dart';
+import 'package:amoresms/page/home.dart';
+import 'package:amoresms/page/landingpage.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:amoresms/util/size_config.dart';
 import 'package:animator/animator.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home("089602716401"),
+      home: MainSplashScreen(),
     );
   }
 }

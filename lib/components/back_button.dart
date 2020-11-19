@@ -10,8 +10,8 @@ class BackBtn extends StatelessWidget {
     return IconButton(
       icon: Icon(
         Icons.navigate_before,
-        color: Colors.blue,
-        size: 40
+        color: white,
+        size: 40,
       ),
       onPressed: () {
         Get.back();
