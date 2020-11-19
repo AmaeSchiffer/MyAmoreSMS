@@ -1,6 +1,5 @@
-import 'package:amoresms/page/inputphonenumber_screen/input_numberphone.dart';
+import 'package:amoresms/page/input_numberphone.dart';
 import 'package:amoresms/util/constants.dart';
-import 'package:amoresms/util/size_config.dart';
 import 'package:animator/animator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +15,21 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: white,
       body: Column(
         children: <Widget>[
           Container(
             color: white,
-            height: SizeConfig.screenHeight * 0.5,
+            height: size.height * 0.5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Animator<double>(
                   curve: Curves.easeInOut,
                   duration: Duration(seconds: 2),
-                  tween: Tween<double>(begin: 0, end: SizeConfig.screenWidth * 0.8),
+                  tween: Tween<double>(begin: 0, end: size.width * 0.8),
                   builder: (context, animatorState, child) => Center(
                     child: Container(
                       height: animatorState.value * 0.5,
@@ -63,8 +63,8 @@ class _LandingPageState extends State<LandingPage> {
             ),
           ),
           Container(
-            height: SizeConfig.screenHeight * 0.5,
-            width: SizeConfig.screenWidth,
+            height: size.height * 0.5,
+            width: size.width,
             decoration: BoxDecoration(
               color: bluePrimary,
               borderRadius: BorderRadius.only(

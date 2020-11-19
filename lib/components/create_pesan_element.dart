@@ -1,12 +1,21 @@
-import 'package:amoresms/model/detail_pesan.dart';
 import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:amoresms/views/content_of_createpesan.dart';
 import 'package:flutter/material.dart';
 
-class DetailPesanComponent extends StatelessWidget {
+class CreatePesanElement extends StatefulWidget {
+  final List<Penerima> listPenerima;
   final Penerima penerima;
-  const DetailPesanComponent({Key key, this.penerima}) : super(key: key);
+  const CreatePesanElement({Key key, this.penerima, this.listPenerima})
+      : super(key: key);
 
+  @override
+  _CreatePesanElementState createState() => _CreatePesanElementState();
+}
+
+
+
+class _CreatePesanElementState extends State<CreatePesanElement> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -60,7 +69,7 @@ class DetailPesanComponent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${penerima.namaPenerima}',
+                        '${widget.penerima.namaPenerima}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
@@ -68,7 +77,7 @@ class DetailPesanComponent extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
-                        '${penerima.noPenerima}',
+                        '${widget.penerima.noPenerima}',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
@@ -79,31 +88,9 @@ class DetailPesanComponent extends StatelessWidget {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 27.0),
-              child: getDelivered(penerima.status),
-            ),
           ],
         ),
       ),
     );
-  }
-
-  Widget getDelivered(String berita) {
-    Container container = new Container();
-    if (equalIgnoreCase(berita, "Delivered")) {
-      container = Container(
-        height: 34,
-        width: 34,
-        child: Image.asset('assets/images/deliveredimages.png'),
-      ); 
-    } else if (equalIgnoreCase(berita, "Error")) {
-      container = Container(
-        height: 34,
-        width: 34,
-        child: Image.asset('assets/images/errorimages.png'),
-      );
-    }
-    return container;
   }
 }
