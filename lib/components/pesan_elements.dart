@@ -1,11 +1,110 @@
+import 'dart:io';
+
 import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
-import 'package:excel/excel.dart';
+import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as xls;
 
-class PesanElement extends StatelessWidget {
-  final Pesan pesan;
-  const PesanElement({Key key, this.pesan}) : super(key: key);
+class PesanElement extends StatefulWidget {
+  final List<Pesan> pesan;
+  final int index;
+  const PesanElement({Key key, this.pesan, this.index}) : super(key: key);
+
+  @override
+  _PesanElementState createState() => _PesanElementState();
+}
+
+class _PesanElementState extends State<PesanElement> {
+  Directory rootPath;
+  String filePath;
+  String dirPath;
+  bool createPesan = false;
+  @override
+  void initState() {
+    super.initState();
+    _prepareStorage();
+  }
+
+  Future<void> _prepareStorage() async {
+    rootPath = Directory('/storage/emulated/0/');
+    Directory sampleFolder = Directory('${rootPath.path}/AmoreExport');
+    if (!sampleFolder.existsSync()) {
+      sampleFolder.createSync();
+    }
+  }
+
+  Future<void> _pickDir() async {
+    var storagesStatus = await Permission.storage.status;
+    if (!storagesStatus.isGranted) await Permission.storage.request();
+    String path = await FilesystemPicker.open(
+      title: 'Save to folder',
+      context: context,
+      rootDirectory: rootPath,
+      fsType: FilesystemType.folder,
+      pickText: 'Save file to this folder',
+      folderIconColor: Colors.teal,
+      requestPermission: () async =>
+          await Permission.storage.request().isGranted,
+    );
+
+    setState(() {
+      dirPath = path;
+      createPesan = true;
+    });
+    _createExcelFile();
+    Navigator.of(context).pop();
+  }
+
+  Future<void> _createExcelFile() async {
+    if (createPesan) {
+      var j = 2;
+      xls.Workbook workbook = new xls.Workbook();
+      //Accessing via index
+      xls.Worksheet sheet = workbook.worksheets[0];
+      sheet.name = "Pesan";
+      sheet.showGridlines = true;
+
+      sheet.getRangeByName('A1').setText('jam');
+      sheet.getRangeByName('B1').setText('hari');
+      sheet.getRangeByName('C1').setText('tanggal');
+      sheet.getRangeByName('D1').setText('pesan');
+
+      for (var i = 2; i < 3; i++) {
+        sheet
+            .getRangeByName('A' + i.toString())
+            .setText(widget.pesan[widget.index].jam);
+        sheet
+            .getRangeByName('B' + i.toString())
+            .setText(widget.pesan[widget.index].hari);
+        sheet
+            .getRangeByName('C' + i.toString())
+            .setText(widget.pesan[widget.index].tanggal);
+        sheet
+            .getRangeByName('D' + i.toString())
+            .setText(widget.pesan[widget.index].pesan);
+      }
+      
+      sheet = workbook.worksheets.addWithName('Penerima');
+      sheet.getRangeByName('A1').setText('namaPenerima');
+      sheet.getRangeByName('B1').setText('nomerPenerima');
+      sheet.getRangeByName('C1').setText('status');
+
+      widget.pesan[widget.index].penerima.forEach((element) {
+        sheet.getRangeByName('A' + j.toString()).setText(element.namaPenerima);
+        sheet.getRangeByName('B' + j.toString()).setText(element.noPenerima);
+        sheet.getRangeByName('C' + j.toString()).setText(element.status);
+        j++;
+      });
+      String namafile = "Export_File_" + widget.pesan[widget.index].tanggal;
+      final List<int> bytes = workbook.saveAsStream();
+      workbook.dispose();
+      String pathToString = dirPath.toString();
+      final File file = File('$pathToString/$namafile.xlsx');
+      await file.writeAsBytes(bytes);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +140,8 @@ class PesanElement extends StatelessWidget {
                   Container(
                     height: 80,
                     width: 80,
-                    child: Image.asset(getImageAsset(pesan.hari)),
+                    child: Image.asset(
+                        getImageAsset(widget.pesan[widget.index].hari)),
                   ),
                   SizedBox(
                     width: 15,
@@ -50,7 +150,7 @@ class PesanElement extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${pesan.jam}',
+                        '${widget.pesan[widget.index].jam}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18),
                       ),
@@ -58,7 +158,7 @@ class PesanElement extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        '${pesan.hari}',
+                        '${widget.pesan[widget.index].hari}',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w300),
                       ),
@@ -66,7 +166,7 @@ class PesanElement extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        '${pesan.tanggal}',
+                        '${widget.pesan[widget.index].tanggal}',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w300),
                       ),
@@ -80,6 +180,7 @@ class PesanElement extends StatelessWidget {
                   size: 28,
                 ),
                 onPressed: () {
+                  //print(widget.pesan[widget.index].jam);
                   showDialog(
                     useSafeArea: true,
                     context: context,
@@ -88,13 +189,10 @@ class PesanElement extends StatelessWidget {
                       content: new Text("Do You want export to File?"),
                       actions: <Widget>[
                         FlatButton(
-                          child: Text('Yes'),
-                          onPressed: () {
-                            var excel = Excel.createExcel();
-                            
-                            Navigator.of(context).pop();
-                          },
-                        ),
+                            child: Text('Yes'),
+                            onPressed: () {
+                              _pickDir();
+                            }),
                         FlatButton(
                           child: Text('No'),
                           onPressed: () {
