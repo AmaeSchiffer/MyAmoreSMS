@@ -12,7 +12,6 @@ class ListViewPesan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: listPesan.length,
@@ -37,7 +36,8 @@ class ListViewPesan extends StatelessWidget {
               ),
             ),
             child: PesanElement(
-              pesan: data,
+              pesan: listPesan,
+              index: i,
             ),
           ),
         );

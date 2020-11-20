@@ -19,7 +19,6 @@ import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sms/sms.dart';
 
 import '../main.dart';
