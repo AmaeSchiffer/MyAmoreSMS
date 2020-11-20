@@ -4,6 +4,7 @@ import 'package:amoresms/page/create_pesan.dart';
 import 'package:amoresms/services/api_services.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:amoresms/views/listviewpesan.dart';
 import 'package:get/get.dart';
@@ -16,16 +17,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Pesan> pesan = [];
-
+  List<Pesan> _pesan = [];
 
   Future getPesan() async {
-    pesan = await apiServices.getPesan(); 
+    _pesan = await apiServices.getPesan();
   }
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+      ],
+    );
     getPesan();
   }
 
@@ -36,9 +41,9 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            Get.to(
+            await Get.to(
               CreatePesan(
-                lastIndexPesan: int.parse(pesan[pesan.length - 1].idPesan) ,
+                lastIndexPesan: int.parse(_pesan[_pesan.length - 1].idPesan),
               ),
             );
           },
@@ -71,10 +76,22 @@ class _HomeState extends State<Home> {
                         ? Container(
                             height: size.height / 2,
                             width: size.width,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                backgroundColor: white,
-                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                CircularProgressIndicator(
+                                  backgroundColor: white,
+                                ),
+                                SizedBox(
+                                  height: 14,
+                                ),
+                                Text(
+                                  "Loading Data...",
+                                  style: TextStyle(
+                                    color: white,
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         : Container(

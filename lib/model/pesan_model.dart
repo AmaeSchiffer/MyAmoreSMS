@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:json_annotation/json_annotation.dart';
-
 SmsModel smsModelFromJson(String str) => SmsModel.fromJson(json.decode(str));
 Pesan pesanFromJson(String str) => Pesan.fromJson(json.decode(str));
 
@@ -31,7 +29,7 @@ class SmsModel {
             : List<dynamic>.from(pesan.map((x) => x.toJson())),
       };
 }
-@JsonSerializable()
+
 class Pesan {
   Pesan({
     this.idPesan,

@@ -1,4 +1,3 @@
-import 'package:amoresms/model/detail_pesan.dart';
 import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class DetailPesanComponent extends StatelessWidget {
         left: 8.0,
         right: 8.0,
         top: 5.0,
+        bottom: 5.0,
       ),
       child: Container(
         height: size.height * 0.1,
@@ -97,7 +97,7 @@ class DetailPesanComponent extends StatelessWidget {
         width: 34,
         child: Image.asset('assets/images/deliveredimages.png'),
       ); 
-    } else if (equalIgnoreCase(berita, "Error")) {
+    } else if (equalIgnoreCase(berita, "Error") || equalIgnoreCase(berita, "Fail") || equalIgnoreCase(berita, "Sent")) {
       container = Container(
         height: 34,
         width: 34,

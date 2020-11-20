@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 
 class ContentOfDetailPesan extends StatefulWidget {
   final List<Penerima> detailPesan;
-  final String pesan;
-  ContentOfDetailPesan(
-      {Key key, @required this.detailPesan, @required this.pesan})
-      : super(key: key);
+  ContentOfDetailPesan({Key key, @required this.detailPesan}) : super(key: key);
 
   @override
   _ContentOfDetailPesanState createState() => _ContentOfDetailPesanState();
@@ -19,44 +16,28 @@ class ContentOfDetailPesan extends StatefulWidget {
 class _ContentOfDetailPesanState extends State<ContentOfDetailPesan> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 12.0,
-            left: 20.0,
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 28.0, top: 12),
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      itemCount: widget.detailPesan.length,
+      itemBuilder: (context, i) {
+        Penerima penerima = Penerima(
+          idPenerima: widget.detailPesan[i].idPenerima,
+          namaPenerima: widget.detailPesan[i].namaPenerima,
+          noPenerima: widget.detailPesan[i].noPenerima,
+          status: widget.detailPesan[i].status,
+        );
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () => print(penerima.namaPenerima),
+            child: DetailPesanComponent(
+              penerima: penerima,
+            ),
           ),
-          child: TextComponent(
-            text: "Receiver Messages",
-            fontSize: 18,
-            color: bluePrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const BouncingScrollPhysics(),
-          itemCount: widget.detailPesan.length,
-          itemBuilder: (context, i) {
-            Penerima penerima = Penerima(
-              idPenerima: widget.detailPesan[i].idPenerima,
-              namaPenerima: widget.detailPesan[i].namaPenerima,
-              noPenerima: widget.detailPesan[i].noPenerima,
-              status: widget.detailPesan[i].status,
-            );
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () => print(penerima.namaPenerima),
-                child: DetailPesanComponent(
-                  penerima: penerima,
-                ),
-              ),
-            );
-          },
-        ),
-      ],
+        );
+      },
     );
   }
 }

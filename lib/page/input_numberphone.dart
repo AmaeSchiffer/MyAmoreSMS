@@ -2,6 +2,7 @@ import 'package:amoresms/page/otp_verification.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:amoresms/util/otp_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,17 @@ class InputPhoneNumber extends StatefulWidget {
 }
 
 class _InputPhoneNumberState extends State<InputPhoneNumber> {
+
+  @override
+  void initState() { 
+    super.initState();
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+      ],
+    );  
+  }
+
   final inputPhoneNumberController = TextEditingController();
   int minNumber = 10000;
   int maxNumber = 99999;

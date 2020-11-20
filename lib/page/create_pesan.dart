@@ -5,6 +5,7 @@ import 'package:amoresms/components/create_pesan_element.dart';
 import 'package:amoresms/components/text_component.dart';
 import 'package:amoresms/components/topimages.dart';
 import 'package:amoresms/model/pesan_model.dart';
+import 'package:amoresms/page/home.dart';
 import 'package:amoresms/services/api_services.dart';
 import 'package:amoresms/util/constants.dart';
 import 'package:amoresms/views/content_of_createpesan.dart';
@@ -13,10 +14,15 @@ import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sms/sms.dart';
+
+import '../main.dart';
 
 class CreatePesan extends StatefulWidget {
   final int lastIndexPesan;
@@ -30,13 +36,15 @@ class _CreatePesanState extends State<CreatePesan> {
   @override
   void initState() {
     super.initState();
-    print("index: " + widget.lastIndexPesan.toString());
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+      ],
+    );
   }
 
   final inputPhoneNumberController = TextEditingController();
   List<Penerima> listPenerima = [];
-  List<Penerima> listPostPenerima = [];
-  Pesan postPesan;
   List<String> listPhoneNumber = new List();
   CreatePesanElement createPesanElement;
   PhoneContact _phoneContact;
@@ -45,6 +53,7 @@ class _CreatePesanState extends State<CreatePesan> {
   bool _cansendmessages = false;
   String dropdownValue = '5 s';
   int timeinterval = 0;
+  String _status = "Error";
 
   Future<void> openStorage() async {
     var storagesStatus = await Permission.storage.status;
@@ -111,21 +120,28 @@ class _CreatePesanState extends State<CreatePesan> {
     }
   }
 
-  Future<void> _sendSMS(int index, int ricipentsLength) async {
-    String status;
+  Future<void> _sendSMS(List<Penerima> list, int index, int ricipentsLength) async {
     if (ricipentsLength == 0) {
+      
       setState(() {
         _progressBarActive = false;
         _cansendmessages = false;
       });
-      postPesan = Pesan(
+      Pesan postPesan = Pesan(
         hari: getHari(),
         tanggal: getTanggal(),
         jam: getJam(),
         pesan: inputPhoneNumberController.text,
-        penerima: listPostPenerima,
+        penerima: list,
       );
+      print("panjang: " + postPesan.penerima.length.toString());
+      for (var i = 0; i < postPesan.penerima.length; i++) {
+        print("status: $i" + postPesan.penerima[i].status);
+      }
       apiServices.setPesan(postPesan);
+      Future.delayed(Duration(seconds: 2),(){
+        Get.offAll(Home(phoneNumber));
+      });
     } else {
       setState(() {
         _progressBarActive = true;
@@ -138,49 +154,46 @@ class _CreatePesanState extends State<CreatePesan> {
             listPenerima[index].noPenerima, inputPhoneNumberController.text);
         message.onStateChanged.listen((state) {
           if (state == SmsMessageState.Sent) {
-            status = "Error";
-            // Fluttertoast.showToast(
-            //   msg: "Messages has sent to " + listPenerima[index].noPenerima,
-            //   toastLength: Toast.LENGTH_LONG,
-            //   backgroundColor: Colors.yellow,
-            //   textColor: Colors.white,
-            //   fontSize: 16.0,
-            // );
-          } else if (state == SmsMessageState.Delivered) {
-            status = "Delivered";
-            // Fluttertoast.showToast(
-            //   msg:
-            //       "Messages has delivered to " + listPenerima[index].noPenerima,
-            //   toastLength: Toast.LENGTH_LONG,
-            //   backgroundColor: Colors.green,
-            //   textColor: Colors.white,
-            //   fontSize: 16.0,
-            // );
+            setState(() {
+              _status = "Sent";
+            });
+          } else if (state == SmsMessageState.Fail) {
+            setState(() {
+              _status = "Fail";
+            });
           }
+          else if (state == SmsMessageState.Delivered) {
+            setState(() {
+              _status = "Delivered";
+            });
+          }
+          print(_status);
         });
         sender.sendSms(message);
         int lastIndex = widget.lastIndexPesan + 1;
-        listPostPenerima.add(
+        list.add(
           Penerima(
-              idPesan: lastIndex.toString(),
-              namaPenerima: listPenerima[index].namaPenerima,
-              noPenerima: listPenerima[index].noPenerima,
-              status: status),
+            idPesan: lastIndex.toString(),
+            namaPenerima: listPenerima[index].namaPenerima,
+            noPenerima: listPenerima[index].noPenerima,
+            status: _status,
+          ),
         );
         // print(getHari());
         // print(getJam());
         // print(getTanggal());
-        return _sendSMS(index + 1, ricipentsLength - 1);
+        return _sendSMS(list, index + 1, ricipentsLength - 1);
       });
     }
   }
 
   void cansendSMS() async {
+    List<Penerima> penerima = List();
     var smsStatus = await Permission.sms.status;
     if (!smsStatus.isGranted) await Permission.sms.request();
     if (await Permission.sms.isGranted) {
       if (!_cansendmessages) {
-        _sendSMS(0, listPenerima.length);
+        _sendSMS(penerima, 0, listPenerima.length);
       } else {
         Fluttertoast.showToast(
           msg: "You are sending a message please wait ..",

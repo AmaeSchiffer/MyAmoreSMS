@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 
 final apiServices = ApiServices();
 
-
 class ApiServices {
   Future<List<Pesan>> getPesan() async {
     try {
@@ -22,16 +21,29 @@ class ApiServices {
   }
 
   Future setPesan(Pesan pesan) async {
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    var body = json.encode({
+      "jamPesan": pesan.jam,
+      "hariPesan": pesan.hari,
+      "tanggalPesan": pesan.tanggal,
+      "pesan": pesan.pesan,
+      "penerima": List<dynamic>.from(pesan.penerima.map((x) => x.toJson())),
+    });
     try {
-      final response = await http.post(baseUrl + "Pesan", body: pesanModelToJson(pesan), headers: {'Content-type':'application/json'});
-      print(response.body.toString());
+      final response =
+          await http.post(baseUrl + "Pesan", body: body, headers: header);
+      //print("response: "+response.body.toString().split("\n")[58]);
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
         return null;
       }
     } catch (e) {
-      print("Exception: "+e.toString());
+      print("Exception: " + e.toString());
       return null;
     }
   }
