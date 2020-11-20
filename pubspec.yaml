@@ -37,6 +37,7 @@ dependencies:
   flutter_sms: ^2.1.1
   fluttercontactpicker: ^3.1.0
   fluttertoast: ^4.0.1
+  format_indonesia: ^0.1.0
   get: ^3.17.1
   http: ^0.12.2
   imagebutton: ^0.0.6

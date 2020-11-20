@@ -1,10 +1,13 @@
 import 'package:amoresms/components/back_button.dart';
+import 'package:amoresms/components/text_component.dart';
 import 'package:amoresms/components/topimages.dart';
 import 'package:amoresms/components/white_box_with_radius.dart';
 import 'package:amoresms/model/pesan_model.dart';
 import 'package:amoresms/views/content_of_detailpesan.dart';
+import 'package:amoresms/views/listviewpesan.dart';
 import 'package:flutter/material.dart';
 import 'package:amoresms/util/constants.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String phoneNumber;
@@ -20,13 +23,14 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
-  Future checkUserLogged() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var obtainPhoneNumber = prefs.getString('userKey');
-    setState(() {
-      phoneNumber = obtainPhoneNumber;
-    });
-    print(phoneNumber);
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+      ],
+    );
   }
 
   @override
@@ -61,12 +65,15 @@ class _DetailState extends State<Detail> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0, left: 12.0),
-                  child: Text(
-                    "${widget.pesan}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Text(
+                      "${widget.pesan}",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
@@ -74,11 +81,17 @@ class _DetailState extends State<Detail> {
             ),
             Positioned(
               top: size.height * 0.25,
-              child: WhiteBoxRadius(
-                size: size,
-                height: 0.75,
-                content: ContentOfDetailPesan(
-                  pesan: widget.pesan,
+              child: Container(
+                height: size.height * 0.77,
+                width: size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                  ),
+                ),
+                child: ContentOfDetailPesan(
                   detailPesan: widget.detailPesan,
                 ),
               ),

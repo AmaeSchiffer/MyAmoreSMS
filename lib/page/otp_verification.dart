@@ -6,6 +6,7 @@ import 'package:amoresms/util/otp_services.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -21,6 +22,8 @@ class OtpVerification extends StatefulWidget {
 }
 
 class _OtpVerification extends State<OtpVerification> {
+
+  
   var onTapRecognizer;
   TextEditingController textEditingController = TextEditingController();
   // ..text = "123456";
@@ -37,6 +40,11 @@ class _OtpVerification extends State<OtpVerification> {
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.portraitUp,
+      ],
+    );
     onTapRecognizer = TapGestureRecognizer()
       ..onTap = () async {
         Navigator.pop(context);
