@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:format_indonesia/format_indonesia.dart';
 
 Color bluePrimary = Color(0xff446595);
 Color white = Color(0xffffffff);
@@ -184,3 +185,21 @@ String getImageAsset(String hari) {
   }
   return val;
 }
+
+String getJam() {
+    final DateTime now = DateTime.now();
+    final String jam = Waktu(now).format('HH:mm');
+    return jam;
+  }
+
+  String getHari() {
+    final DateTime now = DateTime.now();
+    final String hari = Waktu(now).EEEE();
+    return hari;
+  }
+
+  String getTanggal(){
+    final DateTime now = DateTime.now();
+    final String tanggal = Waktu(now).format('d-MMMM-yyyy');
+    return tanggal;
+  }
